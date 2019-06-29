@@ -14,6 +14,7 @@ const Noticia = ({ noticia }) => {
 			</span>
 		</div>
 	: null;
+	// 
 	return (
 		<div className="col s12 m6 l4">
 			<div className="card">

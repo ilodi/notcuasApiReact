@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
 import ListaNoticias from './components/ListaNoticias';
+import Formulario from './components/Formulario';
 
 class App extends Component {
   state = {
@@ -13,8 +14,9 @@ class App extends Component {
   }
 
   //Creando metodo via Arrow 
-  consultarNoticias = async () => {
-    const url = `https://newsapi.org/v2/top-headlines?country=mx&category=business&apiKey=4c286d9d2ebd402897fa358d403e863a`;
+  //Puedes pasar este metodo por un props
+  consultarNoticias = async (categoria = 'general') => {
+    const url = `https://newsapi.org/v2/top-headlines?country=mx&category${categoria}&apiKey=4c286d9d2ebd402897fa358d403e863a`;
 
     //fetch perdir datos mediante un json
     const respuesta = await fetch(url);
@@ -29,10 +31,11 @@ class App extends Component {
   render() {
     return (
       <>
-        <Header titulo="Noticias API"/>
+        <Header titulo="Noticias API" />
         <div className="container white contenedor-noticias">
-        <ListaNoticias
-        noticias={this.state.noticias} />
+          <Formulario consultarNoticias={this.consultarNoticias} />
+          <ListaNoticias
+            noticias={this.state.noticias} />
         </div>
       </>
     );
